@@ -1,7 +1,6 @@
-import { Injectable, NotFoundException, UnauthorizedException, UnprocessableEntityException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, UnprocessableEntityException } from '@nestjs/common';
 import { UsersService } from './users/users.service';
 import { CreateUserDto } from './users/dto/create-user.dto';
-import { LoginUserDto } from './users/dto/login-user.dto';
 import * as bcrypt from 'bcryptjs';
 
 @Injectable()
@@ -34,13 +33,9 @@ export class AuthService {
     });
   }
 
-  async loginUser(loginUser: LoginUserDto) {
-    return this.verifyUserLogin(loginUser.email, loginUser.password);
-  }
-
   async verifyUserLogin(email: string, password: string) {
-    const user = await this.usersService.getUserByEmail(email).catch((error) => {
-      throw new NotFoundException(error, 'User not found by the provided email address');
+    const user = await this.usersService.getUserByEmail(email).catch(() => {
+      throw new UnauthorizedException('User not found by the provided email address');
     });
 
     const passwordIsValid = await bcrypt.compare(password, user.password);

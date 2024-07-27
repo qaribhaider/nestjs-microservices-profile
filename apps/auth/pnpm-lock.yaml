@@ -8,11 +8,17 @@ dependencies:
   '@prisma/client':
     specifier: 5.17.0
     version: 5.17.0(prisma@5.17.0)
+  bcryptjs:
+    specifier: ^2.4.3
+    version: 2.4.3
   prisma:
     specifier: ^5.17.0
     version: 5.17.0
 
 devDependencies:
+  '@types/bcryptjs':
+    specifier: ^2.4.6
+    version: 2.4.6
   dotenv-cli:
     specifier: ^7.4.2
     version: 7.4.2
@@ -62,6 +68,14 @@ packages:
     resolution: {integrity: sha512-UlDgbRozCP1rfJ5Tlkf3Cnftb6srGrEQ4Nm3og+1Se2gWmCZ0hmPIi+tQikGDUVLlvOWx3Gyi9LzgRP+HTXV9w==}
     dependencies:
       '@prisma/debug': 5.17.0
+    dev: false
+
+  /@types/bcryptjs@2.4.6:
+    resolution: {integrity: sha512-9xlo6R2qDs5uixm0bcIqCeMCE6HiQsIyel9KQySStiyqNl2tnj2mP3DX1Nf56MD6KMenNNlBBsy3LJ7gUEQPXQ==}
+    dev: true
+
+  /bcryptjs@2.4.3:
+    resolution: {integrity: sha512-V/Hy/X9Vt7f3BbPJEi8BdVFMByHi+jNXrYkW3huaybV/kQ0KJg0Y6PkEMbn+zeT+i+SiKZ/HMqJGIIt4LZDqNQ==}
     dev: false
 
   /cross-spawn@7.0.3:

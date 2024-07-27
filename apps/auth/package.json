@@ -10,10 +10,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "dotenv-cli": "^7.4.2"
   },
   "dependencies": {
-    "prisma": "^5.17.0",
-    "@prisma/client": "5.17.0"
+    "@prisma/client": "5.17.0",
+    "bcryptjs": "^2.4.3",
+    "prisma": "^5.17.0"
   }
 }

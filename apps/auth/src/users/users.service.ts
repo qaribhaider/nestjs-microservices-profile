@@ -17,4 +17,10 @@ export class UsersService {
       where: { email },
     });
   }
+
+  async getUserById(id: string) {
+    return await this.prismaService.user.findFirstOrThrow({
+      where: { id },
+    });
+  }
 }

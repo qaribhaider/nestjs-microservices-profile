@@ -2,10 +2,15 @@ import { Injectable, UnauthorizedException, UnprocessableEntityException } from 
 import { UsersService } from './users/users.service';
 import { CreateUserDto } from './users/dto/create-user.dto';
 import * as bcrypt from 'bcryptjs';
+import { User } from '@prisma/client';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private jwtService: JwtService,
+  ) {}
 
   getHello(): { message: string; status: string } {
     return {
@@ -44,5 +49,14 @@ export class AuthService {
       throw new UnauthorizedException('Credentials are not valid.');
     }
     return user;
+  }
+
+  async loginUser(user: User) {
+    const payload = { userId: user.id };
+    return {
+      status: 'success',
+      message: 'Login successful',
+      access_token: this.jwtService.sign(payload),
+    };
   }
 }

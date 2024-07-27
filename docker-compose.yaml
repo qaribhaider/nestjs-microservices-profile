@@ -19,7 +19,7 @@ services:
     environment:
       POSTGRES_USER: themainuserforpg
       POSTGRES_PASSWORD: hahD9GDpHpRALJt4ds5V
-      POSTGRES_DB: microservices
+      POSTGRES_DB: auth
     ports:
       - '5442:5432'
     volumes:

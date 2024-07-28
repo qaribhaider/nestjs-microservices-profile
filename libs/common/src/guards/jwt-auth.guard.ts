@@ -1,6 +1,5 @@
 import { CanActivate, ExecutionContext, Inject, Injectable, Logger } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { Reflector } from '@nestjs/core';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { AUTH_SERVICE } from '../constants/services';
 import { User } from '../interfaces/user.interface';
@@ -9,29 +8,25 @@ import { User } from '../interfaces/user.interface';
 export class JwtAuthGuard implements CanActivate {
   private readonly logger = new Logger(JwtAuthGuard.name);
 
-  constructor(
-    @Inject(AUTH_SERVICE) private readonly authClient: ClientProxy,
-    private readonly reflector: Reflector,
-  ) {}
+  constructor(@Inject(AUTH_SERVICE) private readonly authClient: ClientProxy) {}
 
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
-    const jwt = context.switchToHttp().getRequest().headers?.authentication;
-
-    if (!jwt) {
+    const token = context.switchToHttp().getRequest().headers?.authorization;
+    if (!token) {
       return false;
     }
 
     return this.authClient
       .send<User>('authenticate', {
-        Authentication: jwt,
+        authorization: token,
       })
       .pipe(
         tap((res) => {
           context.switchToHttp().getRequest().user = res;
         }),
         map(() => true),
-        catchError((err) => {
-          this.logger.error(err);
+        catchError(() => {
+          this.logger.warn('Unable to authorize from provided JWT token');
           return of(false);
         }),
       );

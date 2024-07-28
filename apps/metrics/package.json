@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migrate": "dotenv -e .env.local -- pnpm prisma migrate dev"
+    "migrate": "dotenv -e .env.local -- pnpm prisma migrate dev",
+    "generate": "dotenv -e .env.local -- pnpm prisma generate"
   },
   "author": "",
   "license": "ISC",
@@ -13,7 +14,7 @@
     "dotenv-cli": "^7.4.2"
   },
   "dependencies": {
-    "@prisma/client": "5.17.0",
+    "@prisma/client": "^5.17.0",
     "prisma": "^5.17.0"
   }
 }

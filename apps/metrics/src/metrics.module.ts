@@ -4,6 +4,7 @@ import { MetricsService } from './metrics.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
 import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
+import { PrismaService } from './prisma.service';
 
 @Module({
   imports: [
@@ -28,6 +29,6 @@ import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
     }),
   ],
   controllers: [MetricsController],
-  providers: [MetricsService],
+  providers: [MetricsService, PrismaService],
 })
 export class MetricsModule {}

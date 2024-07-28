@@ -35,7 +35,7 @@ export class AuthService {
     }
 
     try {
-      const createdUser = this.usersService.create({
+      const createdUser = await this.usersService.create({
         ...createUser,
         password: await bcrypt.hash(createUser.password, 10),
       });

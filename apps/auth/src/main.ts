@@ -5,7 +5,9 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AuthModule);
+  const app = await NestFactory.create(AuthModule, {
+    logger: process.env.NODE_ENV === 'production' ? ['error'] : ['debug'],
+  });
   const configService = app.get(ConfigService);
 
   app.connectMicroservice({

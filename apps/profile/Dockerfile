@@ -17,3 +17,5 @@ COPY libs libs
 RUN cd apps/profile && pnpm install
 
 RUN pnpm run build profile
+
+ENV NODE_ENV=development

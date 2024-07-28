@@ -20,3 +20,5 @@ COPY libs libs
 RUN cd apps/metrics && pnpm install
 
 RUN pnpm run build metrics
+
+ENV NODE_ENV=development

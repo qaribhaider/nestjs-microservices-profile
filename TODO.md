@@ -1,5 +1,6 @@
 TODO.md
 ======
 
-- Setup log levels
+- Setup APM
 - Add .env samples
+- Update README

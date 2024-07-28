@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
   await app.listen(configService.get('HTTP_PORT'), () => {
-    Logger.log(`Auth service started on port ${configService.get('HTTP_PORT')}`);
+    Logger.log(`Service started on port ${configService.get('HTTP_PORT')}`);
   });
 }
 bootstrap();

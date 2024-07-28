@@ -30,6 +30,22 @@ services:
     depends_on:
       - auth
 
+  metrics:
+    build:
+      context: .
+      dockerfile: ./apps/metrics/Dockerfile
+      target: development
+    command: pnpm run start:dev metrics
+    env_file:
+      - ./apps/metrics/.env
+    ports:
+      - '3020:3020'
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - auth
+      - rabbitmq
+
   postgres:
     image: postgres
     environment:

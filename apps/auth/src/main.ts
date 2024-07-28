@@ -20,7 +20,7 @@ async function bootstrap() {
 
   await app.startAllMicroservices();
   await app.listen(configService.get('HTTP_PORT'), () => {
-    Logger.log(`Auth service started on port ${configService.get('HTTP_PORT')}`);
+    Logger.log(`Service started on port ${configService.get('HTTP_PORT')}`);
   });
 }
 bootstrap();

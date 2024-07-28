@@ -6,7 +6,7 @@ export class MetricsController {
   constructor(private readonly metricsService: MetricsService) {}
 
   @Get()
-  getHello(): string {
+  getHello() {
     return this.metricsService.getHello();
   }
 }

@@ -3,7 +3,9 @@ NESTJS MICROSERVICES PROFILE
 
 ## Description
 
-This is a test project demonstrating a microservices approach built using the [NestJS](https://github.com/nestjs/nest) framework. This project is not intended to be a perfect architecture example or production-ready use case, but rather a playground to experiment with messaging between services.
+This is a test project demonstrating a microservices approach built using the [NestJS](https://github.com/nestjs/nest) framework. This project is not intended to be an ideal architecture example or production-ready use case, but rather a playground to experiment with messaging between services.
+
+![System Design](design.png "System Design")
 
 ## Features and details
 

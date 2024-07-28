@@ -35,7 +35,7 @@ services:
       context: .
       dockerfile: ./apps/metrics/Dockerfile
       target: development
-    command: pnpm run start:dev metrics
+    command: sh -c "pnpm prisma migrate deploy --schema apps/metrics/prisma/schema.prisma && pnpm prisma generate --schema apps/metrics/prisma/schema.prisma && pnpm run start:dev metrics"
     env_file:
       - ./apps/metrics/.env
     ports:
@@ -51,7 +51,6 @@ services:
     environment:
       POSTGRES_USER: themainuserforpg
       POSTGRES_PASSWORD: hahD9GDpHpRALJt4ds5V
-      POSTGRES_DB: auth
     ports:
       - '5433:5432'
 

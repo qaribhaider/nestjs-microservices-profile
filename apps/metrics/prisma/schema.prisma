@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "../node_modules/.prisma/client"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x", "linux-musl-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Metric {
+  id        Int      @id @default(autoincrement())
+  eventType String
+  userId    String
+  eventData Json
+  timestamp DateTime @default(now())
+}

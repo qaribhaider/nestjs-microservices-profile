@@ -1,72 +1,82 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+NESTJS MICROSERVICES PROFILE
+======
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This is a test project demonstrating a microservices approach built using the [NestJS](https://github.com/nestjs/nest) framework. This project is not intended to be a perfect architecture example or production-ready use case, but rather a playground to experiment with messaging between services.
+
+## Features and details
+
+- [x] Fully dockerized with Docker Compose support
+- [x] Microservice based architecture
+- [x] Monorepo based structure with common modules extracted out
+- [x] Showcases request response based communication (auth and profile microservices)
+- [x] Showcases pub sub pattern / fan-out (auth and metric microservices)
+- [x] Uses JOI to ensure required env vars are set correctly
+- [x] Different log levels based on the environment
+- [x] Uses Passport for authentication
+- [x] Uses Postgres as database
+- [x] Uses Prisma as ORM
+- [x] Uses RabbitMQ for messaging
+- [ ] Ready for production
 
 ## Installation
 
+1- Copy sample env files within each app to non sample versions, and update the keys / tokens / passwords within it, as well as within docker compose
+
+2- Install dependencies (optional)
 ```bash
-$ pnpm install
+# For IDE support (maybe)
+$ pnpm i -r
 ```
 
-## Running the app
+## Running the project
 
 ```bash
 # development
-$ pnpm run start
+$ docker-compose up --build
 
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+# tear down
+$ docker-compose down
 ```
 
-## Test
+## Try it out
 
 ```bash
-# unit tests
-$ pnpm run test
+# Ensure each service returns the success message
+$ curl --location 'http://localhost:3010/'
+$ curl --location 'http://localhost:3015/'
+$ curl --location 'http://localhost:3020/'
 
-# e2e tests
-$ pnpm run test:e2e
+# Register user
+$ curl --location 'http://localhost:3010/auth/register' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Q",
+    "email": "abc@xyz.com",
+    "password": "SaMhSHDCJ!23sdyeUggxSD"
+}'
 
-# test coverage
-$ pnpm run test:cov
+# Login user
+$ curl --location 'http://localhost:3010/auth/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "email": "abc@xyz.com",
+    "password": "SaMhSHDCJ!23sdyeUggxSD"
+}'
+
+# Get current user's profile
+$ curl --location 'http://localhost:3015/profile/me' \
+--header 'Authorization: Bearer [ACCESS_TOKEN_FROM_LOGIN_RESPONSE]'
 ```
 
-## Support
+## Relevant links
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- [NestJS Microservies](https://docs.nestjs.com/microservices/basics)
+- [Primsa](https://docs.nestjs.com/recipes/prisma)
+- [Passport](https://docs.nestjs.com/recipes/passport)
+- [RabbitMQ Module](https://www.npmjs.com/package/@golevelup/nestjs-rabbitmq)
+- [RabbitMQ Pub/Sub](https://www.rabbitmq.com/tutorials/tutorial-three-javascript)
 
 ## License
 

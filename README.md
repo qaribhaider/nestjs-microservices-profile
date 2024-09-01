@@ -3,7 +3,7 @@ NESTJS MICROSERVICES PROFILE
 
 ## Description
 
-This is a test project demonstrating a microservices approach built using the [NestJS](https://github.com/nestjs/nest) framework. This project is not intended to be an ideal architecture example or production-ready use case, but rather a playground to experiment with messaging between services.
+This is a test project demonstrating microservices approach, built using the [NestJS](https://github.com/nestjs/nest) framework. This project is not intended to be an ideal architecture example or production-ready use case, but rather a playground to experiment with messaging between services.
 
 ![System Design](design.png "System Design")
 
@@ -74,6 +74,7 @@ $ curl --location 'http://localhost:3015/profile/me' \
 
 ## Relevant links
 
+- [Walkthrough on Medium](https://medium.com/@qaribhaider/beginning-with-micro-services-inc-fan-out-191edf281ad8)
 - [NestJS Microservies](https://docs.nestjs.com/microservices/basics)
 - [Primsa](https://docs.nestjs.com/recipes/prisma)
 - [Passport](https://docs.nestjs.com/recipes/passport)
